@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import 'dart:async';
+import 'package:orientation/orientation.dart';
 
 void main() => runApp(new MyApp());
 
@@ -41,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
     Timer.periodic(Duration(seconds: 1), (_) {
       _second.add(DateTime.now().second);
       _minute.add(DateTime.now().minute);
