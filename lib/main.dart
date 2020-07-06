@@ -22,18 +22,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-    10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-    20, 21, 22, 23,];
-
-  final digits = [
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-    10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-    20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-    30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-    40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-    50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
-  ];
 
   final _weight = 220.0;
   final _ftSize = 160.0;
@@ -46,64 +34,120 @@ class _MyHomePageState extends State<MyHomePage> {
     return s;
   }
 
+  StreamController<int> _second = StreamController();
+  StreamController<int> _minute= StreamController();
+  StreamController<int> _hour = StreamController();
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(Duration(seconds: 1), (_) {
+      _second.add(DateTime.now().second);
+      _minute.add(DateTime.now().minute);
+      _hour.add(DateTime.now().hour);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
+
     return new Scaffold(
       body: Container(
         color: Colors.black,
         child: Center(
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlipPanel.builder(
-                itemBuilder: (context, index) => Container(
-                  alignment: Alignment.center,
-                  width: _weight,
-                  height: _weight,
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(41, 41, 41, 1.0),
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                  child: Text(
-                    fixed(hours[index]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text('周' + DateTime.now().weekday.toString(),
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _ftSize,
-                        color: Colors.white),
+                      color: Colors.grey,
+                      fontSize: 20.0,
+                    ),
                   ),
-                ),
-                itemsCount: hours.length,
-//                period: Duration(milliseconds: 1000*60*60),
-//                loop: -1,
-                startIndex: now.hour,
-                spacing: 3.0,
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-              FlipPanel.builder(
-                itemBuilder: (context, index) => Container(
-                  alignment: Alignment.center,
-                  width: _weight,
-                  height: _weight,
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(41, 41, 41, 1.0),
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                  child: Text(
-                    fixed(digits[index]),
+                  Text(DateTime.now().year.toString() + '年' + DateTime.now().month.toString() + '月' + DateTime.now().day.toString() + '日',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _ftSize,
-                        color: Colors.white),
+                      color: Colors.grey,
+                      fontSize: 20.0,
+                    ),
                   ),
-                ),
-                itemsCount: digits.length,
-//                period: Duration(milliseconds: 1000*60),
-//                loop: -1,
-                startIndex: now.minute,
-                spacing: 3.0,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlipPanel.stream(
+                    initValue: DateTime.now().hour,
+                    itemStream: _hour.stream,
+                    itemBuilder: (context, v) => Container(
+                      alignment: Alignment.center,
+                      width: _weight,
+                      height: _weight,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(41, 41, 41, 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                      child: Text(
+                        fixed(v),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: _ftSize,
+                            color: Colors.white),
+                      ),
+                    ),
+                    spacing: 3.0,
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  FlipPanel.stream(
+                    initValue: DateTime.now().minute,
+                    itemStream: _minute.stream,
+                    itemBuilder: (context, v) => Container(
+                      alignment: Alignment.center,
+                      width: _weight,
+                      height: _weight,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(41, 41, 41, 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                      child: Text(
+                        fixed(v),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: _ftSize,
+                            color: Colors.white),
+                      ),
+                    ),
+                    spacing: 3.0,
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  FlipPanel.stream(
+                    initValue: DateTime.now().second,
+                    itemStream: _second.stream,
+                    itemBuilder: (context, v) => Container(
+                      alignment: Alignment.center,
+                      width: _weight,
+                      height: _weight,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(41, 41, 41, 1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                      child: Text(
+                        fixed(v),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: _ftSize,
+                            color: Colors.white),
+                      ),
+                    ),
+                    spacing: 3.0,
+                  ),
+                ],
               ),
             ],
           ),
