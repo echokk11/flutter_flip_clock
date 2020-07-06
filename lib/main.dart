@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import 'dart:async';
 import 'package:orientation/orientation.dart';
+import 'package:wakelock/wakelock.dart';
 
 void main() => runApp(new MyApp());
 
@@ -45,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    Wakelock.enable();
     Timer.periodic(Duration(seconds: 1), (_) {
       _second.add(DateTime.now().second);
       _minute.add(DateTime.now().minute);
@@ -65,16 +67,22 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text('周' + DateTime.now().weekday.toString(),
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20.0,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('周' + DateTime.now().weekday.toString(),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 22.0,
+                      ),
                     ),
                   ),
-                  Text(DateTime.now().year.toString() + '年' + DateTime.now().month.toString() + '月' + DateTime.now().day.toString() + '日',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20.0,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(DateTime.now().year.toString() + '年' + DateTime.now().month.toString() + '月' + DateTime.now().day.toString() + '日',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 22.0,
+                      ),
                     ),
                   ),
                 ],
