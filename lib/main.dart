@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     Timer.periodic(Duration(seconds: 1), (_) {
       _second.add(DateTime.now().second);
       _minute.add(DateTime.now().minute);
