@@ -26,8 +26,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final _weight = 220.0;
-  final _ftSize = 160.0;
+//  final _weight = 150.0;
+  final _ftSize = 130.0;
 
   fixed(n) {
     String s = n.toString();
@@ -56,7 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    final size = MediaQuery.of(context).size;
+    final _weight = (size.width / 3) - 10;
     return new Scaffold(
       body: Container(
         color: Colors.black,
@@ -112,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     spacing: 3.0,
                   ),
                   SizedBox(
-                    width: 20.0,
+                    width: 10.0,
                   ),
                   FlipPanel.stream(
                     initValue: DateTime.now().minute,
@@ -136,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     spacing: 3.0,
                   ),
                   SizedBox(
-                    width: 20.0,
+                    width: 10.0,
                   ),
                   FlipPanel.stream(
                     initValue: DateTime.now().second,
