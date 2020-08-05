@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
+//    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
     final size = MediaQuery.of(context).size;
     final _weight = (size.width / 3) - 10;
     return new Scaffold(
