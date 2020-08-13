@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import 'dart:async';
-import 'package:orientation/orientation.dart';
 import 'package:wakelock/wakelock.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  //不加这个强制横/竖屏会报错
+  WidgetsFlutterBinding.ensureInitialized();
+  // 强制横屏
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight
+  ]);
+
+  runApp(new MyApp());
+
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -44,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
+//    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     Wakelock.enable();
     Timer.periodic(Duration(seconds: 1), (_) {
