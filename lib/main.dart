@@ -51,22 +51,38 @@ class _MyHomePageState extends State<MyHomePage> {
   StreamController<int> _minute= StreamController();
   StreamController<int> _hour = StreamController();
 
+  int _year = DateTime.now().year;
+  int _week = DateTime.now().weekday;
+  int _month = DateTime.now().month;
+  int _day = DateTime.now().day;
+
   @override
   void initState() {
     super.initState();
-//    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     Wakelock.enable();
     Timer.periodic(Duration(seconds: 1), (_) {
-      _second.add(DateTime.now().second);
-      _minute.add(DateTime.now().minute);
-      _hour.add(DateTime.now().hour);
+      int sec = DateTime.now().second;
+      _second.add(sec);
+      if (sec == 0) {
+        int min = DateTime.now().minute;
+        _minute.add(min);
+        if (min == 0) {
+          int h = DateTime.now().hour;
+          _hour.add(h);
+          if (h == 0) {
+            _year = DateTime.now().year;
+            _week = DateTime.now().weekday;
+            _month = DateTime.now().month;
+            _day = DateTime.now().day;
+          }
+        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-//    OrientationPlugin.forceOrientation(DeviceOrientation.landscapeRight);
     final size = MediaQuery.of(context).size;
     final _weight = (size.width / 3) - 10;
     return new Scaffold(
@@ -81,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('周' + DateTime.now().weekday.toString(),
+                    child: Text('周' + _week.toString(),
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 22.0,
@@ -90,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(DateTime.now().year.toString() + '年' + DateTime.now().month.toString() + '月' + DateTime.now().day.toString() + '日',
+                    child: Text(_year.toString() + '年' + _month.toString() + '月' + _day.toString() + '日',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 22.0,
