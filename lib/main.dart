@@ -71,10 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
           int h = DateTime.now().hour;
           _hour.add(h);
           if (h == 0) {
-            _year = DateTime.now().year;
-            _week = DateTime.now().weekday;
-            _month = DateTime.now().month;
-            _day = DateTime.now().day;
+            setState(() {
+              _year = DateTime.now().year;
+              _week = DateTime.now().weekday;
+              _month = DateTime.now().month;
+              _day = DateTime.now().day;
+            });
           }
         }
       }
