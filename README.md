@@ -15,5 +15,5 @@ Without advertising
 ![Screenshot.jpg](Screenshot.jpg)
 
 ## install
-- android download apk here https://github.com/echokk11/flutter_flip_clock/releases
-- ios clone, build and run Xcode on your iphone
+- `android` download apk here https://github.com/echokk11/flutter_flip_clock/releases
+- `ios` clone to local, build and run Xcode on your iphone
