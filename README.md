@@ -8,4 +8,8 @@ A Simple flip clock Flutter application.
 
 Save your old smartphone.
 
+没有广告
+
+Without advertising
+
 ![Screenshot.jpg](Screenshot.jpg)
