@@ -1,7 +1,8 @@
+import 'dart:async';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:math' as math;
-import 'dart:async';
 import 'package:wakelock/wakelock.dart';
 
 void main() {
@@ -62,20 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     Wakelock.enable();
     Timer.periodic(Duration(seconds: 1), (_) {
-      int sec = DateTime.now().second;
+      var dt = DateTime.now();
+      int sec = dt.second;
       _second.add(sec);
       if (sec == 0) {
-        int min = DateTime.now().minute;
+        int min = dt.minute;
         _minute.add(min);
         if (min == 0) {
-          int h = DateTime.now().hour;
+          int h = dt.hour;
           _hour.add(h);
           if (h == 0) {
             setState(() {
-              _year = DateTime.now().year;
-              _week = DateTime.now().weekday;
-              _month = DateTime.now().month;
-              _day = DateTime.now().day;
+              _year = dt.year;
+              _week = dt.weekday;
+              _month = dt.month;
+              _day = dt.day;
             });
           }
         }
