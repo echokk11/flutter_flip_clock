@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
 //  final _weight = 150.0;
   final _ftSize = 155.0;
@@ -59,8 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
     Wakelock.enable();
     Timer.periodic(Duration(seconds: 1), (_) {
       var dt = DateTime.now();
@@ -198,6 +199,34 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    print("--didChangeAppLifecycleState--" + state.toString());
+    switch (state) {
+      case AppLifecycleState.resumed:
+        var dt = DateTime.now();
+        setState(() {
+          _year = dt.year;
+          _week = dt.weekday;
+          _month = dt.month;
+          _day = dt.day;
+          _hour.add(dt.hour);
+          _minute.add(dt.minute);
+          _second.add(dt.second);
+        });
+        break;
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 }
 
