@@ -204,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // TODO: implement didChangeAppLifecycleState
-    print("--didChangeAppLifecycleState--" + state.toString());
+    // print("--didChangeAppLifecycleState--" + state.toString());
     switch (state) {
       case AppLifecycleState.resumed:
         var dt = DateTime.now();
