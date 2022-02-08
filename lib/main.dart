@@ -102,10 +102,10 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('周' + _week.toString(),
+                    child: Text('星期' + _week.toString(),
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 22.0,
+                        fontSize: 26.0,
                       ),
                     ),
                   ),
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                     child: Text(_year.toString() + '年' + _month.toString() + '月' + _day.toString() + '日',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 22.0,
+                        fontSize: 26.0,
                       ),
                     ),
                   ),
