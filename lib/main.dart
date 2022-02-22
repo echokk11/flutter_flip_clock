@@ -90,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final _weight = (size.width / 3) - 10;
+    final _weeks = ['一', '二', '三', '四', '五', '六', '日'];
     return new Scaffold(
       body: Container(
         color: Colors.black,
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('星期' + _week.toString(),
+                    child: Text('星期' + _weeks[_week - 1],
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 26.0,
